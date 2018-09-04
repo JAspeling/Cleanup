@@ -1,0 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
+
+app-root {
+    display: block;
+    height: calc(100vh);
+    padding: 10px;
+    overflow: hidden;
+}
+
+li.node-selected {
+    background: #242429!important;
+}
+
+.node-tree:not(.node-disabled):hover {
+    background-color: #37363E!important;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    background-color: #32363a;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #17191b;
+}
+

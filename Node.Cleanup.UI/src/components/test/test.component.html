@@ -1,0 +1,35 @@
+<div *ngIf="tree">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="input-group">
+              <input type="text" class="form-control" [(ngModel)]="searchString" placeholder="Search for Nodes">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button" (click)="search()">Search</button>
+                <button class="btn btn-default" type="button" (click)="clearSearch()">Clear</button>
+              </span>
+            </div><!-- /input-group -->
+          </div><!-- /.col-lg-6 -->
+    </div>
+    
+    <div class="row">
+        <div class="col-xs-12">
+                <div class="checkbox">
+                    <label> <input type="checkbox" [(ngModel)]="silentMode" (ngModelChange)="updateSilentMode()" > Silent Mode </label>
+                </div>
+        </div>
+    </div>
+    
+    <div class="btn-group button-group" role="group" aria-label="...">
+        <button type="button" class="btn btn-default" (click)="toggleExpandAll()">{{allExpanded ? 'Collapse All' : 'Expand All'}}</button>
+        <button type="button" class="btn btn-default" (click)="toggleNode(0)">{{this.tree.data[0].state.expanded ? 'Collapse Node 0' : 'Expand Node 0'}}</button>
+        <button type="button" class="btn btn-default" (click)="toggleCheckNode(0)">{{this.tree.data[0].state.checked ? 'Uncheck Node 0' : 'Check Node 0'}}</button>
+        <button type="button" class="btn btn-default" (click)="toggleCheckAll()">{{checkAll ? 'Uncheck All' : 'Check All'}}</button>
+        <button type="button" class="btn btn-default" (click)="toggleDisableAll()">{{disableAll ? 'Enable All' : 'Disable All'}}</button>
+        <button type="button" class="btn btn-default" (click)="toggleDisable(0)">{{this.tree.data[0].state.disabled ? 'Enable Node 0' : 'Disable Node 0'}}</button>
+        <button type="button" class="btn btn-default" (click)="getChecked()">Get Checked</button>
+        <button type="button" class="btn btn-default" (click)="getCollapsed()">Get Collapsed</button>
+        <button type="button" class="btn btn-default" (click)="getExpanded()">Get Expanded</button>
+    </div>
+    
+    <treeview-component [tree]="tree" [treeId]="'tree'"></treeview-component>
+</div>

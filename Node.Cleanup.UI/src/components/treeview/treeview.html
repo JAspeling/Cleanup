@@ -1,0 +1,18 @@
+<!-- <div [attr.id]="treeId"></div> -->
+<hr>
+<div class="btn-group button-group" role="group" aria-label="...">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="input-group">
+              <input type="text" class="form-control" [(ngModel)]="searchString" placeholder="Search for Nodes" (keyup)="searchWithKey($event)">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button" (click)="search()">Search</button>
+                <button class="btn btn-default" type="button" (click)="clearSearch()">Clear</button>
+              </span>
+            </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+    </div>
+    <!-- <button type="button" class="btn btn-default" (click)="toggleExpandAll()">{{allExpanded ? 'Collapse All' : 'Expand All'}}</button>    -->
+</div>
+<div [attr.id]="'tree'"></div>
+<!-- Tree ID: {{treeId}} -->

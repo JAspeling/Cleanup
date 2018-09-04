@@ -1,0 +1,7 @@
+.treeview {
+    li {
+        &.list-group-item.node-tree.node-disabled {
+            background: darkorange !important;
+        }
+    }
+}

@@ -1,0 +1,75 @@
+
+<!-- <div id="tree"></div> -->
+<test-component *ngIf="istesting"></test-component>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="input-group">
+          <input type="text" class="form-control" [(ngModel)]="directory" placeholder="Directory" (keyup)="checkWithKey($event)">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" (click)="validate()">Check</button>
+          </span>
+        </div><!-- /input-group -->
+      </div><!-- /.col-lg-6 -->
+</div>
+
+<div class="tree-container">
+    <div class="row">
+        <treeview-component 
+            *ngIf="tree" 
+            [tree]="tree" 
+            [treeId]="'tree'" 
+            [ngClass]="{'col-xs-8': (selectedNode != undefined) || containsSearchResults, 'col-xs-12': selectedNode == undefined && !containsSearchResults}"
+            (onSearched)="onSearched"></treeview-component>
+        
+            <div style="position: absolute; top: 55px; right: 25px; display: block; width: calc(100%/3.2);height: 90%;overflow: hidden;">
+                <div *ngIf="selectedNode" class="panel panel-default col-xs-4 selected-info">
+                    <div class="panel-heading"><h4>{{selectedNode.directoryInfo.name}}</h4></div>
+                    <div class="panel-body">
+                        <span>{{selectedNode.directoryInfo.fullName}}</span><br>
+                        <span><strong>{{selectedNode.directoryInfo.files}}</strong> file{{(selectedNode.directoryInfo.files == 1 ? '' : 's')}}</span><br>
+                        <span><strong>{{selectedNode.directoryInfo.directories?.length}}</strong> Sub-Director{{(selectedNode.directoryInfo.directories?.length == 1 ? 'y' : 'ies')}}</span><br>
+                        <span><strong>{{selectedNode.directoryInfo.friendlySize}}</strong> </span><br>
+                    </div>
+                </div>
+                <!-- {'background-color':person.country === 'UK' ? 'green' : 'red' } -->
+                <!-- [ngStyle]="{'height': (!selected ? 100% : calc(100% - 100px))}" -->
+                <div *ngIf="containsSearchResults" class="panel panel-default col-xs-4 selected-info results-container" [ngStyle]="{'height':(selectedNode == undefined) ? '99%' : 'calc(100% - 245px)' }">
+                    <div class="panel-heading"><h4>Search Results</h4></div>
+                    <div class="panel-body">
+                        <span><strong>{{searchMatches}}</strong> result(s)</span><br>
+                        <span><strong>{{searchSizeString}} (selected {{selectedSizeString}})</strong> </span><br>
+                        <div class="list-content">
+                            <div *ngIf="searchMatches > 0" style="display: block; margin-bottom: 0.5em;">
+                                <div class="squaredThree" style="margin-left: 11px">
+                                    <input type="checkbox" value="None" id="toggleAll" [(ngModel)]="allSelected" (change)="toggleAll()" />
+                                    <label for="toggleAll"></label>
+                                </div>
+                                <span>Toggle Select All</span>
+                            </div>
+                            <div *ngFor="let result of searchResults" class="input-group input-group-sm ">
+                                <span class="input-group-addon">
+                                    <div class="squaredThree">
+                                        <input type="checkbox" value="None" [attr.id]="result.id" [(ngModel)]="result.state.checked" (change)="checkChange($event.srcElement.checked, result)"/>
+                                        <label [attr.for]="result.id"></label>
+                                    </div>
+                                </span>
+                                <input type="text" readonly class="form-control pointer-input" placeholder="Username" (click)="selectNode(result)" [(ngModel)]="result.directoryInfo.fullName" aria-describedby="sizing-addon3">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-danger" type="button" (click)="deleteDirectory(result)"><i class="fa fa-trash"></i></button>
+                                  </span>
+                            </div>
+                        </div>
+                        <button *ngIf="getSelectedNodes()" class="btn btn-danger delete-all" type="button" (click)="deleteDirectories()">
+                            <i class="fa fa-trash"></i>
+                            <span>Delete Selected Item(s)</span></button>
+                    </div>
+                </div>
+            </div>
+        
+
+        
+    </div>
+</div>
+
+<loader-component></loader-component>

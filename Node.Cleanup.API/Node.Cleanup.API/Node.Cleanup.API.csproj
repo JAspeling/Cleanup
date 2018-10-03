@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\" />
+    <Folder Include="vendors\**\*" CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,6 +19,10 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
 
+  <!-- <ItemGroup>
+    <Content Include="vendors\**\*" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup> -->
+
   <ItemGroup>
     <None Update="cmd.mac.sh">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -25,7 +30,10 @@
     <None Update="cmd.win.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="rimraf">
+    <None Update="rimraf\**\*">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="cmd.mac.sh">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
